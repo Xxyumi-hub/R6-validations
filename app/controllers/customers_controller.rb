@@ -26,29 +26,44 @@ rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   # POST /customers or /customers.json
   def create
     @customer = Customer.new(customer_params)
-
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to @customer, notice: "Customer was successfully created." }
-        format.json { render :show, status: :created, location: @customer }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
-      end
+    if @customer.save
+      flash.notice = "The customer record was created"
+      redirect_to @customer
+    else
+      flash.now.alert = @customer.errors.full_messages.to_sentence
+      render :new
     end
+  #  @customer = Customer.new(customer_params)
+
+  #  respond_to do |format|
+  #    if @customer.save
+  #      format.html { redirect_to @customer, notice: "Customer was successfully created." }
+  #      format.json { render :show, status: :created, location: @customer }
+  #    else
+  #      format.html { render :new, status: :unprocessable_entity }
+  #      format.json { render json: @customer.errors, status: :unprocessable_entity }
+  #    end
+  #  end
   end
 
   # PATCH/PUT /customers/1 or /customers/1.json
   def update
-    respond_to do |format|
-      if @customer.update(customer_params)
-        format.html { redirect_to @customer, notice: "Customer was successfully updated." }
-        format.json { render :show, status: :ok, location: @customer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
-      end
+    if @customer.update(customer_params)
+      flash.notice = "The customer record was updated"
+      redirect_to @customer
+    else
+      flash.now.alert = @customer.errors.full_messages.to_sentence
+      render :edit
     end
+  #  respond_to do |format|
+  #    if @customer.update(customer_params)
+  #      format.html { redirect_to @customer, notice: "Customer was successfully updated." }
+  #      format.json { render :show, status: :ok, location: @customer }
+  #    else
+  #      format.html { render :edit, status: :unprocessable_entity }
+  #      format.json { render json: @customer.errors, status: :unprocessable_entity }
+  #    end
+  #  end
   end
 
   # DELETE /customers/1 or /customers/1.json
