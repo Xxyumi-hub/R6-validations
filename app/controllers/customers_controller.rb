@@ -12,6 +12,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
 
   # GET /customers/1 or /customers/1.json
   def show
+    @customer = Customer.find(params[:id])
+    @orders = @customer.orders
   end
 
   # GET /customers/new
@@ -33,6 +35,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
       flash.now.alert = @customer.errors.full_messages.to_sentence
       render :new
     end
+  # alternate way to do the above^
   #  @customer = Customer.new(customer_params)
 
   #  respond_to do |format|
@@ -55,6 +58,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
       flash.now.alert = @customer.errors.full_messages.to_sentence
       render :edit
     end
+  # alternate way to do the above^
   #  respond_to do |format|
   #    if @customer.update(customer_params)
   #      format.html { redirect_to @customer, notice: "Customer was successfully updated." }
@@ -92,3 +96,4 @@ rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
       redirect_to customers_path
     end
 end
+
