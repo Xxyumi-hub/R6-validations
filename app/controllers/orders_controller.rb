@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
 
-  layout 'order_layout'
+  #layout 'order_layout'
   # GET /orders or /orders.json
   def index
     @orders = Order.all

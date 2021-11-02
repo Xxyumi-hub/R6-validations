@@ -4,7 +4,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
 
   before_action :set_customer, only: %i[ show edit update destroy ]
 
-  layout 'customer_layout'
+  #layout 'customer_layout'
+  
   # GET /customers or /customers.json
   def index
     @customers = Customer.all

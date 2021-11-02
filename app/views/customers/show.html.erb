@@ -1,32 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @customer.first_name %>
-</p>
+<div class="card shadow p-3 mb-5 bg-white rounded">
+  <p>
+    <strong>First name:</strong>
+    <%= @customer.first_name %>
+  </p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @customer.last_name %>
-</p>
+  <p>
+    <strong>Last name:</strong>
+    <%= @customer.last_name %>
+  </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @customer.phone %>
-</p>
+  <p>
+    <strong>Phone:</strong>
+    <%= @customer.phone %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @customer.email %>
-</p>
-
-<%= link_to 'Edit', edit_customer_path(@customer) %> 
-<%= link_to 'Back', customers_path %>
+  <p>
+    <strong>Email:</strong>
+    <%= @customer.email %>
+  </p>
+</div>
+<%= link_to 'Edit', edit_customer_path(@customer), class: "btn btn-primary" %> 
+<%= link_to 'Back', customers_path, class: "btn btn-primary" %>
 
 
   <% if @orders.empty? %>
     <h3>There are no orders</h3>
   <% else %>
+  <div class="card shadow p-3 mb-5 bg-white rounded">
     <table>
     <% @orders.each do |order| %>
       <tr>
@@ -38,5 +40,6 @@
       </tr>
     <% end %>
     </table> 
+  </div>
   <% end %>
   
